@@ -59,3 +59,44 @@
   
     <script src="assets/js/lib/bootstrap/bootstrap.min.js"></script>
     <script src="assets/js/site/index.js"></script>
+    <script>
+        
+        function saveToLocalStorage(key, value) {
+            localStorage.setItem(key, value);
+        }
+
+        function loadFromLocalStorage() {
+            const fields = ['name', 'provincia', 'ciudad', 'sector', 'calle', 'carrera'];
+            fields.forEach(field => {
+                const value = localStorage.getItem(field);
+                if (value) {
+                    document.getElementById(field).value = value;
+                }
+            });
+        }
+
+       
+        window.onload = function() {
+            loadFromLocalStorage();
+        }
+
+        function validateAndRedirect() {
+    
+            const isValid = validate();  
+
+            if (isValid) {
+                const selectedValue = document.getElementById('carrera').value;
+                if (selectedValue === "software") {
+                    window.location.href = "seleccion_software.html";
+                } else if (selectedValue === "multimedia") {
+                    window.location.href = "seleccion_multimedia.html";
+                } else if (selectedValue === "redes") {
+                    window.location.href = "seleccion_redes.html";
+                }
+            } else {
+                alert("Por favor, completa todos los campos.");
+            }
+        }
+    </script>
+</body>
+</html>
