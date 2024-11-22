@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de inscripción</title>
+    <link rel="stylesheet" href="assets/css/lib/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/site/main.css"/>
+</head>
+<body>
+    <header></header>
+    <main class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-8 offset-md-2 mt-5">
+                <div class="card">
+                    <div class="card-header bg-primary text-light text-center">
+                        <h5>Datos personales</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Toda la información es requerida</h5>
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="name" onchange="saveToLocalStorage('name', this.value)" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="provincia" class="form-label">Provincia:</label>
+                            <input type="text" class="form-control" id="provincia" onchange="saveToLocalStorage('provincia', this.value)" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="ciudad" class="form-label">Ciudad:</label>
+                            <input type="text" class="form-control" id="ciudad" onchange="saveToLocalStorage('ciudad', this.value)" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="sector" class="form-label">Sector:</label>
+                            <input type="text" class="form-control" id="sector" onchange="saveToLocalStorage('sector', this.value)" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="calle" class="form-label">Calle:</label>
+                            <input type="text" class="form-control" id="calle" onchange="saveToLocalStorage('calle', this.value)" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="carrera" class="form-label">Carrera:</label>
+                            <select class="form-select" id="carrera" onchange="saveToLocalStorage('carrera', this.value)">
+                                <option value="">Selecciona una opción</option>
+                                <option value="software">Software</option>
+                                <option value="multimedia">Multimedia</option>
+                                <option value="redes">Redes</option>
+                            </select>
+                        </div>
+
+                        <button onclick="validateAndRedirect()" type="button" class="btn btn-outline-success float-end">Registrar</button>
+                        <button onclick="clearFields()" type="button" class="btn btn-outline-warning  ">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+  
+    <script src="assets/js/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/js/site/index.js"></script>
