@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación</title>
+    <link rel="stylesheet" href="assets/css/lib/bootstrap/bootstrap.min.css"/>
+</head>
+<body>
+    <div class="container mt-5">
+        <a href="index.html"> Datos personales</a>
+        <div class="card">
+            <div class="card-header bg-success text-light text-center">
+                <h4>Confirmación</h4>
+            </div>
+            <div class="card-body">
+                <h5>Datos básicos</h5>
+                <ul id="datos-personales" class="list-group">
+                   
+                </ul>
+
+                <h5 class="mt-4">Horarios seleccionados</h5>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Asignatura</th>
+                            <th>Horario</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-horarios">
+                        
+                    </tbody>
+                </table>
+                <button class="btn btn-outline-danger mb-3 " onclick="regresar()">Regresar</button>
+                <button id="finalizarButton" class="btn btn-success float-end">Finalizar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function regresar() {
+            window.history.back(); 
+        }
+    </script>
+
+    <script>
+       
+        function crearElementoLista(texto) {
+            const li = document.createElement('li');
+            li.classList.add('list-group-item');
+            li.textContent = texto;
+            return li;
+        }
+
+        
+        function crearFilaTabla(asignatura, horario) {
+            const fila = document.createElement('tr');
+            const celdaAsignatura = document.createElement('td');
+            const celdaHorario = document.createElement('td');
+
+            celdaAsignatura.textContent = asignatura;
+            celdaHorario.textContent = horario;
+
+            fila.appendChild(celdaAsignatura);
+            fila.appendChild(celdaHorario);
+
+            return fila;
+        }
+
+        
+        function cargarDatos() {
+            const nombre = localStorage.getItem('name') || 'No disponible';
+            const provincia = localStorage.getItem('provincia') || 'No disponible';
+            const ciudad = localStorage.getItem('ciudad') || 'No disponible';
+            const sector = localStorage.getItem('sector') || 'No disponible';
+            const calle = localStorage.getItem('calle') || 'No disponible';
+            const carreraSeleccionada = localStorage.getItem('carrera') || 'No disponible';
+            
+           
+            const horariosSeleccionados = JSON.parse(sessionStorage.getItem('horariosSeleccionados')) || [];
+
+            
+            const datosPersonales = document.getElementById('datos-personales');
+            datosPersonales.appendChild(crearElementoLista(`Nombre: ${nombre}`));
+            datosPersonales.appendChild(crearElementoLista(`Provincia: ${provincia}`));
+            datosPersonales.appendChild(crearElementoLista(`Ciudad: ${ciudad}`));
+            datosPersonales.appendChild(crearElementoLista(`Sector: ${sector}`));
+            datosPersonales.appendChild(crearElementoLista(`Calle: ${calle}`));
+            datosPersonales.appendChild(crearElementoLista(`Carrera: ${carreraSeleccionada}`));
+
+         
+            const tablaHorarios = document.getElementById('tabla-horarios');
+            horariosSeleccionados.forEach(horario => {
+                const fila = crearFilaTabla(horario.materia, horario.horario);
+                tablaHorarios.appendChild(fila);
+            });
+        }
+
+        /
+        window.onload = cargarDatos;
+
+        
+        document.getElementById('finalizarButton').addEventListener('click', function() {
+            const confirmacion = confirm("¿Está seguro de que desea finalizar? Esto reiniciará la aplicación.");
+            if (confirmacion) {
+                
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+    <script src="assets/js/lib/bootstrap/bootstrap.min.js"></script>
+</body>
+</html>
